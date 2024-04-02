@@ -1,29 +1,30 @@
-
 # rag-chroma-multi-modal
 
-Multi-modal LLMs enable visual assistants that can perform question-answering about images. 
+Multi-modal LLMs enable visual assistants that can perform question-answering about images.
 
 This template create a visual assistant for slide decks, which often contain visuals such as graphs or figures.
 
 It uses OpenCLIP embeddings to embed all of the slide images and stores them in Chroma.
- 
+
 Given a question, relevat slides are retrieved and passed to GPT-4V for answer synthesis.
 
 ![Diagram illustrating the workflow of a multi-modal LLM visual assistant using OpenCLIP embeddings and GPT-4V for question-answering based on slide deck images.](https://github.com/langchain-ai/langchain/assets/122662504/b3bc8406-48ae-4707-9edf-d0b3a511b200 "Workflow Diagram for Multi-modal LLM Visual Assistant")
 
 ## Input
 
-Supply a slide deck as pdf in the `/docs` directory. 
+Supply a slide deck as pdf in the `/docs` directory.
 
 By default, this template has a slide deck about Q3 earnings from DataDog, a public techologyy company.
 
 Example questions to ask can be:
+
 ```
 How many customers does Datadog have?
 What is Datadog platform % Y/Y growth in FY20, FY21, and FY22?
 ```
 
 To create an index of the slide deck, run:
+
 ```
 poetry install
 python ingest.py
@@ -40,6 +41,7 @@ The first time you run the app, it will automatically download the multimodal em
 By default, LangChain will use an embedding model with moderate performance but lower memory requirments, `ViT-H-14`.
 
 You can choose alternative `OpenCLIPEmbeddings` models in `rag_chroma_multi_modal/ingest.py`:
+
 ```
 vectorstore_mmembd = Chroma(
     collection_name="multi-modal-rag",
@@ -79,15 +81,16 @@ langchain app add rag-chroma-multi-modal
 ```
 
 And add the following code to your `server.py` file:
+
 ```python
 from rag_chroma_multi_modal import chain as rag_chroma_multi_modal_chain
 
 add_routes(app, rag_chroma_multi_modal_chain, path="/rag-chroma-multi-modal")
 ```
 
-(Optional) Let's now configure LangSmith. 
-LangSmith will help us trace, monitor and debug LangChain applications. 
-LangSmith is currently in private beta, you can sign up [here](https://smith.langchain.com/). 
+(Optional) Let's now configure LangSmith.
+LangSmith will help us trace, monitor and debug LangChain applications.
+LangSmith is currently in private beta, you can sign up [here](https://smith.langchain.com/).
 If you don't have access, you can skip this section
 
 ```shell
@@ -102,11 +105,11 @@ If you are inside this directory, then you can spin up a LangServe instance dire
 langchain serve
 ```
 
-This will start the FastAPI app with a server is running locally at 
+This will start the FastAPI app with a server is running locally at
 [http://localhost:8000](http://localhost:8000)
 
 We can see all templates at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-We can access the playground at [http://127.0.0.1:8000/rag-chroma-multi-modal/playground](http://127.0.0.1:8000/rag-chroma-multi-modal/playground)  
+We can access the playground at [http://127.0.0.1:8000/rag-chroma-multi-modal/playground](http://127.0.0.1:8000/rag-chroma-multi-modal/playground)
 
 We can access the template from code with:
 
