@@ -52,28 +52,44 @@ export class IndexService {
       from(inputs).pipe(
         mergeMap(async (input) => {
           const { chunkStart, clip } = input;
-
           console.log('clip', clip);
-          if (!clip) {
-            return null;
-          }
 
+          // for now still write with default value for better timestamp seek
+
+          if (!clip) {
+            return {
+              cid: 'dummy',
+              chunkStart,
+              clip: [
+                // empty marker
+                {
+                  text: ' ',
+                },
+              ],
+            };
+          }
           const { cid } = await this.storageService.addFile(
             this.walletPrivateKey,
             JSON.stringify(clip),
           );
 
+          console.log('created file', cid, clip.length);
           return {
             cid,
             chunkStart,
             clip,
           };
         }),
-        filter(Boolean),
+        filter((result) => !!result?.cid),
         toArray(),
       ),
     );
 
+    console.log('results', results);
+
+    if (!results.length) {
+      return [];
+    }
     // max 1024 length
     const insertIndexTemplate =
       'INSERT INTO ' +

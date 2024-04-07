@@ -78,7 +78,7 @@ export const uploadText = async (text: string, apiKey: string) => {
   );
 
   const { data } = response;
-  console.log(data);
+  console.log('uploadText', data);
 
   return {
     name: data.Name,

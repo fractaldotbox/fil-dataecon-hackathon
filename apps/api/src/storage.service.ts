@@ -14,12 +14,12 @@ export class StorageService {
   }
 
   async addFile(walletPrivateKey: string, content: string) {
-    const params = await createLighthouseParams({
-      lighthouseApiKey: this.apiKey,
-      walletPrivateKey,
-    });
-
     return await uploadText(content, this.apiKey);
+
+    // const params = await createLighthouseParams({
+    //   lighthouseApiKey: this.apiKey,
+    //   walletPrivateKey,
+    // });
 
     // return await uploadEncryptedFileWithText(content, ...params);
   }
