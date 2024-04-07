@@ -2,13 +2,13 @@
 
 ### Project Overview
 
-This project is a submission to the hackathon.
+This project is a submission to the ["Filecoin IPC Data Economy Hackathon"](https://dorahacks.io/hackathon/filecoin-data-economy/onboarding)
 
 Slides can be found at https://docs.google.com/presentation/d/1AVLqkqH05mcDIStsDQljMHI_xg8kGiZ06iIAb6t2Bsg/edit?usp=sharing
 
 #### Demo
 
-- hosted at <TODO> by Vercel
+- You can run the model at localhost:3001 with LangSmith to investigate queries
 
 ### Archiecture
 
