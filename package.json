@@ -24,6 +24,7 @@
     }
   },
   "dependencies": {
-    "@nestjs/cli": "^10.3.2"
+    "@nestjs/cli": "^10.3.2",
+    "hardhat": "^2.22.2"
   }
 }

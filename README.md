@@ -49,6 +49,10 @@ env-cmd pnpm lint
 env-cmd pnpm format
 ```
 
+### Setup
+- whisper
+- https://github.com/openai/whisper
+
 #### Testing
 
 
