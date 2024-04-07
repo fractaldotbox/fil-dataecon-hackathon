@@ -113,3 +113,7 @@ export const uploadEncryptedFileWithText = async (
     cid: data.Hash,
   };
 };
+
+export const getFile = async (cid: string) => {
+  return got('https://gateway.lighthouse.storage/ipfs/' + cid).buffer();
+};

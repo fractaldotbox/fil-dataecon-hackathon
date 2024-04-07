@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { format } from 'path';
-import { Client, MusicClient } from 'youtubei';
+import { Client, MusicClient, Video } from 'youtubei';
 
 import { concat, firstValueFrom, from } from 'rxjs';
 
@@ -32,6 +32,14 @@ export class YtService {
     return youtube;
   }
 
+  // possible to use getVideoTranscript to get official one, not to be mixed with asr generations
+  // but facing this error
+  // TypeError: Cannot read properties of undefined (reading 'transcriptBodyRenderer')
+
+  async extractPlatformMetadata(videoId: string) {
+    return (await this.getClient().getVideo(videoId)) as Video;
+  }
+
   // no effective way to search videos within a channel
 
   async paginateVideos(params, limit: number = 100) {
@@ -57,17 +65,23 @@ export class YtService {
   }
 
   // https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#extract-audio
-  async extractAudio(videoId: string) {
+  async extractAudio(videoId: string, startS?: number, endS?: number) {
     const client = youtubedl.create(youtubedl['constants'].YOUTUBE_DL_PATH);
+
+    // for partial extract no support by native ASR
+    // --download-sections "*10:15-inf"';
+
     return client(asYoutubeUrl(videoId), {
       dumpSingleJson: true,
       noCheckCertificates: true,
-      noWarnings: true,
+      // noWarnings: true,
+      verbose: true,
       preferFreeFormats: true,
       audioFormat: 'mp3',
       extractAudio: true,
       addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
-    }).then(async (output: any) => {
+      'download-sections': '*01:30-01:35',
+    } as any).then(async (output: any) => {
       const url = output.url!;
       console.time('extract');
       const tempFile = tmp.fileSync();

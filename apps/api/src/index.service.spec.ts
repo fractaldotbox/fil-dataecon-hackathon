@@ -48,7 +48,7 @@ describe('IndexService', () => {
     const videoId = 'be7L7nsY5Zc';
     const indexResults = await indexService.indexVideo(videoId);
 
-    expect(indexResults).toEqual(123);
+    expect(indexResults[0]?.success).toEqual(true);
   });
 
   it('#writeIndices', async () => {
@@ -57,10 +57,12 @@ describe('IndexService', () => {
 
     const indexResults = await indexService.writeIndices([
       {
+        key: 'youtube-1',
         chunkStart: 3,
         clip: segments1,
       },
       {
+        key: 'youtube-1',
         chunkStart: 11,
         clip: segments2,
       },
@@ -71,6 +73,16 @@ describe('IndexService', () => {
 
   it('#loadIndex', async () => {
     const indexResults = await indexService.loadIndex();
+    console.log('indexResults', indexResults);
+
+    expect(!!indexResults[0]?.content).toEqual(true);
+  });
+  it('#loadIndexWithVideo', async () => {
+    const indexResults = await indexService.loadIndexWithVideo(
+      'be7L7nsY5Zc',
+      30,
+    );
+    console.log('indexResults', indexResults);
 
     expect(!!indexResults[0]?.content).toEqual(true);
   });

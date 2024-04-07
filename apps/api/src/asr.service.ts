@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createOpenAi } from './adapters/openai';
 import { createReadStream, fstat, readFileSync } from 'fs';
 import { join } from 'path';
+import { Segment, joinText } from './domain/transcript';
 
 @Injectable()
 export class AsrService {
@@ -24,7 +26,6 @@ export class AsrService {
       model: 'whisper-1',
       // prompt: '',
       // temperature: '0.1',
-
       // response_format: 'vtt',
       response_format: 'verbose_json',
       // use of word actually give much like sentence
@@ -35,6 +36,21 @@ export class AsrService {
     console.log('transcription', transcription);
 
     return transcription;
+  }
+
+  // asText(segments: any[]) {
+  //   return segments.map(({ text }) => text).join(' ');
+  // }
+
+  stitch(segments: any[]): Segment {
+    const firstSegment = _.first(segments);
+    const lastSegment = _.last(segments);
+
+    return {
+      start: firstSegment.start,
+      end: lastSegment.end,
+      text: joinText(segments),
+    };
   }
 
   clip(segments: any[], startTimeS: number, endTimeS: number) {

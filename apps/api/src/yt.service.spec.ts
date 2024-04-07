@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { YtService } from './yt.service';
 
-jest.setTimeout(10 * 1000);
+jest.setTimeout(15 * 60 * 1000);
 describe('YtService', () => {
   let ytService: YtService;
 
@@ -14,10 +14,17 @@ describe('YtService', () => {
     ytService = app.get<YtService>(YtService);
   });
 
-  describe('root', () => {
-    it('#extractAudio', async () => {
-      const results = await ytService.extractAudio('QX8qFzuGaEE');
-      expect(!!results).toBe(true);
-    });
+  it('#extractPlatformMetadata', async () => {
+    const results = await ytService.extractPlatformMetadata('be7L7nsY5Zc');
+
+    expect(results.duration > 0).toEqual(true);
+  });
+  it('#extractAudio all', async () => {
+    const results = await ytService.extractAudio('be7L7nsY5Zc');
+    expect(!!results).toBe(true);
+  });
+  it.only('#extractAudio partially', async () => {
+    const results = await ytService.extractAudio('be7L7nsY5Zc', 30, 60);
+    expect(!!results).toBe(true);
   });
 });

@@ -4,26 +4,26 @@ import { AsrService } from './asr.service';
 import { createLighthouseParams } from './adapters/lighthouse';
 import { StorageService } from './storage.service';
 import { ConfigService } from '@nestjs/config';
-import { defineBlock } from 'viem';
+import { setTimeout } from 'timers/promises';
 import { createSigner } from './adapters/tableland';
 import { Database } from '@tableland/sdk';
 import {
+  bufferCount,
   filter,
   firstValueFrom,
   flatMap,
   from,
   map,
   mergeMap,
+  tap,
   toArray,
 } from 'rxjs';
 import { YtService } from './yt.service';
-import { asDbParams, asIndex } from './adapters/index.mapper';
-import { asYoutubeUrl } from './adapters/youtube';
-const TIME_INTERVAL = 30;
-
-const INDEX_KEY = 'youtube';
+import { asContentKey, asDbParams, asIndex } from './adapters/index.mapper';
+import { asKey, asYoutubeUrl } from './adapters/youtube';
 
 export type Input = {
+  key: string;
   chunkStart: number;
   clip: any;
 };
@@ -32,6 +32,7 @@ export class IndexService {
   private walletPrivateKey;
   private db;
   private indexTableName;
+  private timeIntervalS;
   constructor(
     private readonly asrService: AsrService,
     private readonly configService: ConfigService,
@@ -43,6 +44,8 @@ export class IndexService {
     );
     this.indexTableName = this.configService.get<string>('db.indexTableName');
 
+    this.timeIntervalS = this.configService.get<number>('video.timeIntervalS');
+
     const signer = createSigner(this.walletPrivateKey);
     this.db = new Database({ signer });
   }
@@ -51,7 +54,7 @@ export class IndexService {
     const results = await firstValueFrom(
       from(inputs).pipe(
         mergeMap(async (input) => {
-          const { chunkStart, clip } = input;
+          const { key, chunkStart, clip } = input;
           console.log('clip', clip);
 
           // for now still write with default value for better timestamp seek
@@ -75,6 +78,7 @@ export class IndexService {
 
           console.log('created file', cid, clip.length);
           return {
+            key,
             cid,
             chunkStart,
             clip,
@@ -85,7 +89,7 @@ export class IndexService {
       ),
     );
 
-    console.log('results', results);
+    console.log('results', results.length, results);
 
     if (!results.length) {
       return [];
@@ -96,8 +100,8 @@ export class IndexService {
       this.indexTableName +
       '(type, cid, content_key, content) VALUES (?, ?, ?, ?)';
 
-    const allParams = results.map(({ cid, chunkStart, clip }) =>
-      asDbParams(INDEX_KEY, chunkStart, cid, clip),
+    const allParams = results.map(({ cid, key, chunkStart, clip }) =>
+      asDbParams(key, chunkStart, cid, clip),
     );
 
     const insertResults = await this.db.batch(
@@ -122,9 +126,11 @@ export class IndexService {
     return results.filter(({ content }) => Boolean(content)).map(asIndex);
   }
 
-  async loadIndexWithVideo(videoId: string) {
+  async loadIndexWithVideo(videoId: string, chunkStart: number) {
+    const contentKey = asContentKey(asKey(videoId), chunkStart);
     const { results } = await this.db
-      .prepare(`SELECT * FROM ${this.indexTableName} where key = '';`)
+      .prepare(`SELECT * FROM ${this.indexTableName} where content_key = ?;`)
+      .bind(contentKey)
       .all();
 
     return results.filter(({ content }) => Boolean(content)).map(asIndex);
@@ -132,6 +138,8 @@ export class IndexService {
 
   async indexVideo(videoId: string) {
     console.log('indexVideo', videoId, asYoutubeUrl(videoId));
+
+    const key = asKey(videoId);
     const audioStream = await this.ytService.extractAudio(videoId);
 
     const transcript = await this.asrService.generateTranscript(audioStream);
@@ -140,18 +148,37 @@ export class IndexService {
 
     // write bigger chunks to be more effective
     const writeResults = await firstValueFrom(
-      from(_.range(0, TIME_INTERVAL, duration / TIME_INTERVAL + 1)).pipe(
-        mergeMap((chunkStart) => {
+      from(
+        _.range(0, this.timeIntervalS, duration / this.timeIntervalS + 1),
+      ).pipe(
+        tap((chunkStart) => {
+          console.log('write chunkStart', chunkStart, this.timeIntervalS);
+        }),
+        map((chunkStart) => {
           const clip = this.asrService.clip(
             transcript.segments,
             chunkStart,
-            TIME_INTERVAL,
+            this.timeIntervalS,
           );
 
           console.log('clip', clip);
 
-          return this.writeIndices([chunkStart, clip]);
+          return {
+            key,
+            chunkStart,
+            clip,
+          };
         }),
+        bufferCount(10),
+        mergeMap(async (chunks, i) => {
+          // this part shd not //
+          // error like nonce 34 already in mpool
+          console.log('write chunks', i);
+
+          const res = await setTimeout(10 * 1000, 'result');
+
+          return await this.writeIndices(chunks);
+        }, 1),
         toArray(),
       ),
     );

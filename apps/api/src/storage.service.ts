@@ -5,6 +5,7 @@ import {
   uploadEncryptedFileWithText,
   uploadText,
 } from './adapters/lighthouse';
+import got from 'got';
 
 @Injectable()
 export class StorageService {
