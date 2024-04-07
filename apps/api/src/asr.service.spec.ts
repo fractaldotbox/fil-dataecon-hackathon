@@ -41,7 +41,7 @@ describe('AsrService', () => {
   });
 
   it('with audio', async () => {
-    const audioStream = await ytService.loadAudio('be7L7nsY5Zc');
+    const audioStream = await ytService.extractAudio('be7L7nsY5Zc');
     // TODO add duration
     const results = await asrService.generateTranscript(audioStream);
 

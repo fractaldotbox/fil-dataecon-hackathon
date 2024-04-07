@@ -53,6 +53,9 @@ export const retrievePoDsi = async (cid: string) => {
 // wokraorund seems .uploadText no deal params options
 
 export const uploadText = async (text: string, apiKey: string) => {
+  if (!text) {
+    throw new Error('Empty text');
+  }
   const dealParams = {
     num_copies: 2, // Number of backup copies
     repair_threshold: 28800, // When a storage sector is considered "broken"
@@ -63,9 +66,10 @@ export const uploadText = async (text: string, apiKey: string) => {
     add_mock_data: 2, // Mock data size in MB
   };
   const tmpobj = tmp.fileSync();
+
+  console.log('text', text);
   writeFileSync(tmpobj.name, text);
   console.log('File: ', tmpobj.name);
-  console.log('Filedescriptor: ', tmpobj.fd);
   const response = await lighthouse.upload(
     tmpobj.name,
     apiKey,

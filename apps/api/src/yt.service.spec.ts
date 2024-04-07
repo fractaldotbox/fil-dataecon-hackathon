@@ -15,8 +15,8 @@ describe('YtService', () => {
   });
 
   describe('root', () => {
-    it('#loadAudio', async () => {
-      const results = await ytService.loadAudio('QX8qFzuGaEE');
+    it('#extractAudio', async () => {
+      const results = await ytService.extractAudio('QX8qFzuGaEE');
       expect(!!results).toBe(true);
     });
   });

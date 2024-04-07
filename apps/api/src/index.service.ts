@@ -7,9 +7,18 @@ import { ConfigService } from '@nestjs/config';
 import { defineBlock } from 'viem';
 import { createSigner } from './adapters/tableland';
 import { Database } from '@tableland/sdk';
-import { firstValueFrom, flatMap, from, map, mergeMap, toArray } from 'rxjs';
+import {
+  filter,
+  firstValueFrom,
+  flatMap,
+  from,
+  map,
+  mergeMap,
+  toArray,
+} from 'rxjs';
 import { YtService } from './yt.service';
 import { asDbParams, asIndex } from './adapters/index.mapper';
+import { asYoutubeUrl } from './adapters/youtube';
 const TIME_INTERVAL = 30;
 
 const INDEX_KEY = 'youtube';
@@ -44,6 +53,11 @@ export class IndexService {
         mergeMap(async (input) => {
           const { chunkStart, clip } = input;
 
+          console.log('clip', clip);
+          if (!clip) {
+            return null;
+          }
+
           const { cid } = await this.storageService.addFile(
             this.walletPrivateKey,
             JSON.stringify(clip),
@@ -55,6 +69,7 @@ export class IndexService {
             clip,
           };
         }),
+        filter(Boolean),
         toArray(),
       ),
     );
@@ -91,8 +106,17 @@ export class IndexService {
     return results.filter(({ content }) => Boolean(content)).map(asIndex);
   }
 
+  async loadIndexWithVideo(videoId: string) {
+    const { results } = await this.db
+      .prepare(`SELECT * FROM ${this.indexTableName} where key = '';`)
+      .all();
+
+    return results.filter(({ content }) => Boolean(content)).map(asIndex);
+  }
+
   async indexVideo(videoId: string) {
-    const audioStream = await this.ytService.loadAudio(videoId);
+    console.log('indexVideo', videoId, asYoutubeUrl(videoId));
+    const audioStream = await this.ytService.extractAudio(videoId);
 
     const transcript = await this.asrService.generateTranscript(audioStream);
 
@@ -117,5 +141,7 @@ export class IndexService {
     );
 
     console.log('write results', writeResults);
+
+    return writeResults;
   }
 }

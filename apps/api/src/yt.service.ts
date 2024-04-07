@@ -18,6 +18,10 @@ import got from 'got';
 import { createReadStream, createWriteStream } from 'fs';
 import stream from 'stream';
 import { promisify } from 'util';
+
+import tmp from 'tmp';
+import { asYoutubeUrl } from './adapters/youtube';
+
 const pipeline = promisify(stream.pipeline);
 
 @Injectable()
@@ -53,9 +57,9 @@ export class YtService {
   }
 
   // https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#extract-audio
-  async loadAudio(videoId: string) {
+  async extractAudio(videoId: string) {
     const client = youtubedl.create(youtubedl['constants'].YOUTUBE_DL_PATH);
-    return client('https://www.youtube.com/watch?v=' + videoId, {
+    return client(asYoutubeUrl(videoId), {
       dumpSingleJson: true,
       noCheckCertificates: true,
       noWarnings: true,
@@ -65,12 +69,12 @@ export class YtService {
       addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
     }).then(async (output: any) => {
       const url = output.url!;
-
       console.time('extract');
-      const fileName = 'temp.mp3';
+      const tempFile = tmp.fileSync();
+      const fileName = tempFile.name + '.mp3';
       await pipeline(got.stream(url), createWriteStream(fileName));
       console.timeEnd('extract');
-      console.log('downloaded file', videoId, fileName);
+      console.log('extract file', videoId, fileName);
       return createReadStream(fileName);
     });
   }

@@ -4,8 +4,11 @@ import { CrawlService } from './crawl.service';
 import { ConfigModule } from '@nestjs/config';
 import config from './config';
 import { YtService } from './yt.service';
+import { IndexService } from './index.service';
+import { AsrService } from './asr.service';
+import { StorageService } from './storage.service';
 
-jest.setTimeout(5 * 60 * 1000);
+jest.setTimeout(20 * 60 * 1000);
 describe('CrawlService', () => {
   let crawlService;
   beforeEach(async () => {
@@ -16,12 +19,18 @@ describe('CrawlService', () => {
         }),
       ],
       controllers: [],
-      providers: [YtService, CrawlService],
+      providers: [
+        IndexService,
+        AsrService,
+        StorageService,
+        YtService,
+        CrawlService,
+      ],
     }).compile();
 
     crawlService = app.get<CrawlService>(CrawlService);
   });
-  it('create frontier table', async () => {
+  it('#create frontier table', async () => {
     const signer = createSigner(process.env.INDEXER_WALLET_PRIVATE_KEY);
 
     const db = createDbWithSigner(signer);
@@ -34,7 +43,15 @@ describe('CrawlService', () => {
     console.log('frontier', results);
   });
 
-  it.only('seedFrontier', async () => {
+  it('#seedFrontier', async () => {
     await crawlService.seedFrontier();
+
+    const results = await crawlService.loadFrontier();
+    console.log('results', results);
+  });
+
+  it('#crawl', async () => {
+    const results = await crawlService.crawl();
+    console.log('results', results);
   });
 });
