@@ -4,6 +4,10 @@ import { Injectable } from '@nestjs/common';
 import { YtService } from './yt.service';
 import { firstValueFrom, from, mergeAll, mergeMap, tap, toArray } from 'rxjs';
 import { Playlist } from 'youtubei';
+import { ConfigService } from '@nestjs/config';
+import { createSigner } from './adapters/tableland';
+import { Database } from '@tableland/sdk';
+import { IndexService } from './index.service';
 
 const FRONTIER_SEED = [
   {
@@ -25,11 +29,23 @@ const FRONTIER_SEED = [
 @Injectable()
 export class CrawlService {
   private frontier: any;
-
-  constructor(private readonly ytService: YtService) {
+  private db: Database;
+  private walletPrivateKey: string;
+  private frontierTableName;
+  constructor(
+    private readonly ytService: YtService,
+    private readonly configService: ConfigService,
+    private readonly indexService: IndexService,
+  ) {
     this.frontier = new Set();
 
-    this.seedFrontier();
+    this.frontierTableName = configService.get<string>('db.frontierTableName');
+    this.walletPrivateKey = this.configService.get<string>(
+      'indexer.walletPrivateKey',
+    );
+
+    const signer = createSigner(this.walletPrivateKey);
+    this.db = new Database({ signer });
   }
 
   async seedFrontier() {
@@ -43,7 +59,7 @@ export class CrawlService {
         type: 'video',
       });
 
-    await firstValueFrom(
+    const results = await firstValueFrom(
       from([
         {
           fetchFx: queryVideosPlaylist,
@@ -58,19 +74,50 @@ export class CrawlService {
       ]).pipe(
         mergeMap((query) => this.ytService.paginateVideos(query)),
         // toArray()
-        tap((videoIds) => {
-          videoIds.forEach((videoId: any) => {
-            console.log('add video id', videoId);
-            this.frontier.add(videoId);
-          });
-        }),
+        // tap((videoIds) => {
+        //   videoIds.forEach((videoId: any) => {
+        //     console.log('add video id', videoId);
+        //     this.frontier.add(videoId);
+        //   });
+        // }),
         mergeAll(),
         toArray(),
       ),
     );
 
+    // max 1024 length
+    const insertFrontierTemplate =
+      'INSERT INTO ' + this.frontierTableName + '(type, videoId) VALUES (?, ?)';
+
+    const allParams = results.map((videoId) => {
+      console.log('videoId', videoId);
+      return ['video', videoId];
+    });
+
+    const insertResults = await this.db.batch(
+      allParams.map((params) =>
+        this.db.prepare(insertFrontierTemplate).bind(...params),
+      ),
+    );
+
     console.log('frontier # videos', this.frontier.size);
+    console.log('insertResults', insertResults);
   }
 
-  async index() {}
+  async crawl() {
+    const { results } = await this.db
+      .prepare(`SELECT * FROM ${this.frontierTableName};`)
+      .all();
+
+    // TODO check status
+    // TODO delay
+    await firstValueFrom(
+      from(results.map(({ videoId }) => videoId as string)).pipe(
+        mergeMap((videoId) => {
+          return this.indexService.indexVideo(videoId);
+        }),
+        toArray(),
+      ),
+    );
+  }
 }
