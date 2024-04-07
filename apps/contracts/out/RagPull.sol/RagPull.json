@@ -1,0 +1,454 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b503260009081526020819052604090206127109055603f8060316000396000f3fe6080604052600080fdfea2646970667358221220b4ee1b71024b7bf641014f34be765e8090efc726c4536114ec194992c915012a64736f6c63430008110033",
+    "sourceMap": "57:230:25:-:0;;;214:70;;;;;;;;;-1:-1:-1;255:9:25;246:8;:19;;;;;;;;;;268:5;246:27;;57:230;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x6080604052600080fdfea2646970667358221220b4ee1b71024b7bf641014f34be765e8090efc726c4536114ec194992c915012a64736f6c63430008110033",
+    "sourceMap": "57:230:25:-:0;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/RagPull.sol\":\"RagPull\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"details\":{\"constantOptimizer\":true,\"cse\":true,\"deduplicate\":true,\"inliner\":true,\"jumpdestRemover\":true,\"orderLiterals\":true,\"peephole\":true,\"yul\":false},\"runs\":200},\"remappings\":[\":@ds-test/=lib/ds-test/src/\",\":@forge-std/=lib/forge-std/src/\",\":@oz/=lib/oz/contracts/\",\":@solmate/=lib/solmate/src/\",\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/RagPull.sol\":{\"keccak256\":\"0xf2031975a572f2c043523af05ca35c847822b6194675c5f835b30ee71b8f358f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ec6e46e6e8dbf10ad68e6a47fd844fe5bfe5d89a9510091b80daefb48042639a\",\"dweb:/ipfs/QmawAUU3BZvqZuqtRLhhXq4YZ6jXMzhe31VDzTQAYjYue2\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "_to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "_value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@ds-test/=lib/ds-test/src/",
+        "@forge-std/=lib/forge-std/src/",
+        "@oz/=lib/oz/contracts/",
+        "@solmate/=lib/solmate/src/",
+        "forge-std/=lib/forge-std/src/"
+      ],
+      "optimizer": {
+        "runs": 200,
+        "details": {
+          "peephole": true,
+          "inliner": true,
+          "jumpdestRemover": true,
+          "orderLiterals": true,
+          "deduplicate": true,
+          "cse": true,
+          "constantOptimizer": true,
+          "yul": false
+        }
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/RagPull.sol": "RagPull"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "src/RagPull.sol": {
+        "keccak256": "0xf2031975a572f2c043523af05ca35c847822b6194675c5f835b30ee71b8f358f",
+        "urls": [
+          "bzz-raw://ec6e46e6e8dbf10ad68e6a47fd844fe5bfe5d89a9510091b80daefb48042639a",
+          "dweb:/ipfs/QmawAUU3BZvqZuqtRLhhXq4YZ6jXMzhe31VDzTQAYjYue2"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/RagPull.sol",
+    "id": 46659,
+    "exportedSymbols": {
+      "RagPull": [
+        46658
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:255:25",
+    "nodes": [
+      {
+        "id": 46634,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:25",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 46658,
+        "nodeType": "ContractDefinition",
+        "src": "57:230:25",
+        "nodes": [
+          {
+            "id": 46638,
+            "nodeType": "VariableDeclaration",
+            "src": "84:34:25",
+            "nodes": [],
+            "constant": false,
+            "mutability": "mutable",
+            "name": "balances",
+            "nameLocation": "110:8:25",
+            "scope": 46658,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
+            },
+            "typeName": {
+              "id": 46637,
+              "keyType": {
+                "id": 46635,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "93:7:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "84:25:25",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 46636,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "104:4:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 46646,
+            "nodeType": "EventDefinition",
+            "src": "129:75:25",
+            "nodes": [],
+            "anonymous": false,
+            "eventSelector": "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+            "name": "Transfer",
+            "nameLocation": "135:8:25",
+            "parameters": {
+              "id": 46645,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 46640,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_from",
+                  "nameLocation": "160:5:25",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46646,
+                  "src": "144:21:25",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 46639,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "144:7:25",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 46642,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "_to",
+                  "nameLocation": "183:3:25",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46646,
+                  "src": "167:19:25",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 46641,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "167:7:25",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 46644,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_value",
+                  "nameLocation": "196:6:25",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46646,
+                  "src": "188:14:25",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 46643,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "188:7:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "143:60:25"
+            }
+          },
+          {
+            "id": 46657,
+            "nodeType": "FunctionDefinition",
+            "src": "214:70:25",
+            "nodes": [],
+            "body": {
+              "id": 46656,
+              "nodeType": "Block",
+              "src": "228:56:25",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 46654,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 46649,
+                        "name": "balances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 46638,
+                        "src": "246:8:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                          "typeString": "mapping(address => uint256)"
+                        }
+                      },
+                      "id": 46652,
+                      "indexExpression": {
+                        "expression": {
+                          "id": 46650,
+                          "name": "tx",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -26,
+                          "src": "255:2:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_transaction",
+                            "typeString": "tx"
+                          }
+                        },
+                        "id": 46651,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "258:6:25",
+                        "memberName": "origin",
+                        "nodeType": "MemberAccess",
+                        "src": "255:9:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "246:19:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "3130303030",
+                      "id": 46653,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "268:5:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_10000_by_1",
+                        "typeString": "int_const 10000"
+                      },
+                      "value": "10000"
+                    },
+                    "src": "246:27:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 46655,
+                  "nodeType": "ExpressionStatement",
+                  "src": "246:27:25"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 46647,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "225:2:25"
+            },
+            "returnParameters": {
+              "id": 46648,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "228:0:25"
+            },
+            "scope": 46658,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RagPull",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          46658
+        ],
+        "name": "RagPull",
+        "nameLocation": "66:7:25",
+        "scope": 46659,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 25
+}
