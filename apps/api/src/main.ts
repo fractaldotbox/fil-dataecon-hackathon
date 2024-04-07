@@ -33,6 +33,7 @@ async function startChatActor() {
 
   await app.listen(3003);
 }
+
 startValidatorActor();
 startIndexActor();
 startChatActor();
