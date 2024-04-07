@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@zondax/filecoin-solidity": "4.0.2",
-    "solidity-cborutils": "^2.0.0"
+    "solidity-cborutils": "^2.0.0",
+    "@ensdomains/buffer": "0.1.1"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

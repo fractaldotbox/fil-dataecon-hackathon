@@ -190,6 +190,9 @@ importers:
 
   apps/contracts:
     dependencies:
+      '@ensdomains/buffer':
+        specifier: 0.1.1
+        version: 0.1.1
       '@zondax/filecoin-solidity':
         specifier: 4.0.2
         version: 4.0.2(@nomiclabs/hardhat-web3@2.0.0)(hardhat@2.22.2)(web3-core-helpers@1.10.3)(web3-core-promievent@1.10.3)(web3-eth-abi@1.10.4)(web3-utils@1.10.4)(web3@1.10.4)
@@ -1062,6 +1065,10 @@ packages:
       - web3-core-promievent
       - web3-eth-abi
       - web3-utils
+    dev: false
+
+  /@ensdomains/buffer@0.1.1:
+    resolution: {integrity: sha512-92SfSiNS8XorgU7OUBHo/i1ZU7JV7iz/6bKuLPNVsMxV79/eI7fJR6jfJJc40zAHjs3ha+Xo965Idomlq3rqnw==}
     dev: false
 
   /@ensdomains/ens@0.4.5:

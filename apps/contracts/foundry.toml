@@ -8,9 +8,11 @@ remappings = [
     "@solmate/=lib/solmate/src/",
     "@forge-std/=lib/forge-std/src/",
     "@oz/=lib/oz/contracts/",
-
-    "@openzeppelin/contracts/=lib/forge-std/src/",
-    "@zondax/filecoin-solidity/=node_modules/@zondax/filecoin-solidity/"
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "@zondax/filecoin-solidity/=node_modules/@zondax/filecoin-solidity/",
+    "@ensdomains/buffer/contracts/=node_modules/@ensdomains/buffer/contracts/",
+    
+    "solidity-cborutils/=node_modules/solidity-cborutils/",
 ]
 
 rpc_endpoints = { calibration = '${CALIBRATION}' }

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import {ProofData, InclusionProof, InclusionVerifierData, InclusionAuxData, SegmentDesc, Fr32} from '../data-segment/ProofTypes.sol';
+import {ProofData, InclusionProof, InclusionVerifierData, InclusionAuxData, SegmentDesc, Fr32} from "../data-segment/ProofTypes.sol";
 
 // Behavioral Interface for an aggregator oracle
 interface IAggregatorOracle {
@@ -52,10 +52,10 @@ interface IAggregatorOracle {
   // Get all deal IDs for a specified cid
   function getAllDeals(bytes memory _cid) external view returns (Deal[] memory);
 
-  // getActiveDeals should return all the _cid's active dealIds
+  // getActiveDeals should return all the _cid"s active dealIds
   function getActiveDeals(bytes memory _cid) external returns (Deal[] memory);
 
-  // getExpiringDeals should return all the deals' dealIds if they are expiring within `epochs`
+  // getExpiringDeals should return all the deals" dealIds if they are expiring within `epochs`
   function getExpiringDeals(
     bytes memory _cid,
     uint64 epochs

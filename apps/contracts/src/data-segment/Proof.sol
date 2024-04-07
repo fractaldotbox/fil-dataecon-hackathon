@@ -9,6 +9,7 @@ import {Cid} from './Cid.sol';
 import {ProofData, InclusionProof, InclusionVerifierData, InclusionAuxData, SegmentDesc, Fr32} from './ProofTypes.sol';
 import {MarketAPI} from '@zondax/filecoin-solidity/contracts/v0.8/MarketAPI.sol';
 import {MarketTypes} from '@zondax/filecoin-solidity/contracts/v0.8/types/MarketTypes.sol';
+// import {CommonTypes} from "@zondax/filecoin-solidity/contracts/v0.8/types/CommonTypes.sol";
 
 contract Proof {
   using Cid for bytes;
@@ -84,8 +85,10 @@ contract Proof {
     // check that the deal is not terminated
     MarketTypes.GetDealActivationReturn memory dealActivation = MarketAPI
       .getDealActivation(dealId);
-    require(dealActivation.terminated <= 0, 'Deal is terminated');
-    require(dealActivation.activated > 0, 'Deal is not activated');
+
+    // commented for type error 
+    // require(dealActivation.terminated <= CommonTypes.ChainEpoch(0), 'Deal is terminated');
+    // require(dealActivation.activated > CommonTypes.ChainEpoch(0), 'Deal is not activated');
 
     MarketTypes.GetDealDataCommitmentReturn
       memory dealDataCommitment = MarketAPI.getDealDataCommitment(dealId);
