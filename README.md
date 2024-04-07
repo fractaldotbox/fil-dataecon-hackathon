@@ -31,6 +31,12 @@ Slides can be found at <TODO>
 ### Techstack of Smart Contract
 
 - Foundry
+- cd apps/contracts
+- forge install
+- forge build
+
+- for test, specify calibration testnet rpc url explictly
+  -  forge test --rpc-url https://calibration.filfox.info/rpc/v1
 
 ### Building Env
 

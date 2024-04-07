@@ -5,6 +5,7 @@ import { privateKeyToAccount, signMessage } from 'viem/accounts';
 import { filecoinCalibration, sepolia } from 'viem/chains';
 import kavach from '@lighthouse-web3/kavach';
 import { writeFileSync } from 'fs';
+// import { CID } from 'multiformats/cid'
 import tmp from 'tmp';
 
 // clien to cache
@@ -117,3 +118,12 @@ export const uploadEncryptedFileWithText = async (
 export const getFile = async (cid: string) => {
   return got('https://gateway.lighthouse.storage/ipfs/' + cid).buffer();
 };
+
+
+// cannot find multiformats
+// export const mapCidAsBytes = (cid:string)=>{
+//   // https://github.com/filecoin-project/community/discussions/633
+
+//   const v0 = CID.parse(cid)
+//   return v0
+// }

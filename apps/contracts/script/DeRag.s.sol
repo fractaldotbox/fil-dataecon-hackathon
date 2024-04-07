@@ -10,6 +10,7 @@ contract DeRagScript is Script {
         vm.broadcast();
         uint256 deployerPrivateKey = vm.envUint("DEPLOYER_WALLET_PRIVATE_KEY");
         address deployerAddress = vm.addr(deployerPrivateKey);
-        // console.log('deployer address', deployerAddress);
+        console.log("deployer address", deployerAddress);
     }
+
 }

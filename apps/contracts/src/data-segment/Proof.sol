@@ -86,7 +86,7 @@ contract Proof {
     MarketTypes.GetDealActivationReturn memory dealActivation = MarketAPI
       .getDealActivation(dealId);
 
-    // commented for type error 
+    // commented for type error
     // require(dealActivation.terminated <= CommonTypes.ChainEpoch(0), 'Deal is terminated');
     // require(dealActivation.activated > CommonTypes.ChainEpoch(0), 'Deal is not activated');
 

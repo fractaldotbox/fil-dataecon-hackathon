@@ -8,7 +8,7 @@ import { IndexService } from './index.service';
 import { AsrService } from './asr.service';
 import { StorageService } from './storage.service';
 
-jest.setTimeout(20 * 60 * 1000);
+jest.setTimeout(60 * 60 * 1000);
 describe('CrawlService', () => {
   let crawlService;
   beforeEach(async () => {

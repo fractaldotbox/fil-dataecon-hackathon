@@ -24,20 +24,29 @@ const FRONTIER_SEED = [
   //   channelId: 'UCygtiXCT3fs-aadgMINZ5xw',
   // },
   {
+    type: 'search',
+    keyword: 'Ang Mo Kio property',
+  },
+  {
+    type: 'search',
+    keyword: 'Tiong Bahru Apartment',
+  },
+  {
     type: 'playlist',
     playlistId: 'PLYIHyr0q2nW8W1Hr0PyMyztqYFt9ZoLbs',
   },
-
   {
     type: 'search',
     keyword: 'Singapore property',
   },
-
+  {
+    type: 'search',
+    keyword: 'Singapore condo',
+  },
   {
     type: 'search',
     keyword: 'HDB Flat',
   },
-
   {
     type: 'search',
     keyword: 'Singapore Real Estate',
@@ -135,7 +144,7 @@ export class CrawlService {
 
   async loadFrontier() {
     const { results } = await this.db
-      .prepare(`SELECT * FROM ${this.frontierTableName};`)
+      .prepare(`SELECT * FROM ${this.frontierTableName} order by id desc;`)
       .all();
 
     return results;

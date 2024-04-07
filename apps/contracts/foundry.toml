@@ -15,8 +15,8 @@ remappings = [
     "solidity-cborutils/=node_modules/solidity-cborutils/",
 ]
 
-rpc_endpoints = { calibration = '${CALIBRATION}' }
-chain_id = 3141
+rpc_endpoints = { calibration = 'https://calibration.filfox.info/rpc/v1' }
+chain_id = 314159
 fuzz_runs = 256
 optimizer = true
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

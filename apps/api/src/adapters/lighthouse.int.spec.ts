@@ -57,4 +57,10 @@ describe('with file encrypted', () => {
     console.log('buffer', buffer.toString());
     expect(buffer.toString()).toEqual('abcde');
   });
+
+  // test.skip('#mapCidAsBytes', async ()=>{
+  //   const pieceCID = 'baga6ea4seaqkp2pjlh6avlvee6ib2maanav5sc35l5glf3zm6rd6hmfgcx5xeji'
+  //   const bytes = mapCidAsBytes(pieceCID)
+  //   expect(bytes).toEqual('')
+  // });
 });
