@@ -97,8 +97,6 @@ export class ValidatorService {
       ),
     );
 
-    console.log('indices clip', indicesWithClips);
-    // candidateTranscript: any,
 
     const candidateTranscript = {
       segments: _.flatMap(indicesWithClips, ({ clip }) => clip),

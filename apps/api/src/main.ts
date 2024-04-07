@@ -2,16 +2,17 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { CrawlService } from './crawl.service';
 
+
+// crawlService.seedFrontier();
+
 async function startValidatorActor() {
   const app = await NestFactory.create(AppModule);
 
   const crawlService = app.get<CrawlService>(CrawlService);
 
-  crawlService.seedFrontier();
-
   // publish what is needed and status
 
-  await app.listen(3001);
+  await app.listen(3003);
 }
 
 async function startIndexActor() {
@@ -19,7 +20,6 @@ async function startIndexActor() {
 
   const crawlService = app.get<CrawlService>(CrawlService);
 
-  crawlService.seedFrontier();
 
   await app.listen(3002);
 }
@@ -27,11 +27,7 @@ async function startIndexActor() {
 async function startChatActor() {
   const app = await NestFactory.create(AppModule);
 
-  const crawlService = app.get<CrawlService>(CrawlService);
-
-  crawlService.seedFrontier();
-
-  await app.listen(3003);
+  await app.listen(3001);
 }
 
 startValidatorActor();

@@ -33,6 +33,8 @@ export class LLMService {
 
   async refreshKb() {
     const indices = await this.indexService.loadIndex();
+
+    console.log('indices size', indices.length)
     // console.log('load indices', indices.length);
     // rag pull the kb to in memory vector base
     this.vectorStore = await HNSWLib.fromTexts(

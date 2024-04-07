@@ -120,7 +120,7 @@ export class IndexService {
 
   async loadIndex() {
     const { results } = await this.db
-      .prepare(`SELECT * FROM ${this.indexTableName};`)
+      .prepare(`SELECT * FROM ${this.indexTableName} limit 1000;`)
       .all();
 
     return results.filter(({ content }) => Boolean(content)).map(asIndex);
