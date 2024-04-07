@@ -1,4 +1,4 @@
-# RAG PULL
+# DeRAG
 
 ### Project Overview
 

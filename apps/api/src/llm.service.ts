@@ -57,7 +57,6 @@ export class LLMService {
     // console.log(transcript);
 
     // load common RAG database
-    // RAG PULL
     await this.refreshKb();
 
     console.log('query', queryDto);
