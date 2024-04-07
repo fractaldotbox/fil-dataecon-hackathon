@@ -12,6 +12,7 @@ export default () => {
       frontierTableName: 'frontier_314159_842',
     },
     indexer: {
+      concurrency: 3,
       walletPrivateKey: process.env.INDEXER_WALLET_PRIVATE_KEY,
     },
     validator: {

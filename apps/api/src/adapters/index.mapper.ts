@@ -1,8 +1,16 @@
 import _ from 'lodash';
 
-export const asDbParams = (indexKey, chunkStart, cid, clip) => {
-  const contentKey = [indexKey, chunkStart].join('_');
+export const asContentKey = (indexKey: string, chunkStart: number) => {
+  return [indexKey, chunkStart].join('_');
+};
 
+export const asDbParams = (
+  indexKey: string,
+  chunkStart: number,
+  cid: string,
+  clip: any,
+) => {
+  const contentKey = asContentKey(indexKey, chunkStart);
   const content = _.take(clip.map(({ text }) => text).join(' '), 1000);
   return [indexKey, cid, contentKey, content];
 };
