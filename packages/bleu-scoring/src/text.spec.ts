@@ -1,5 +1,5 @@
 // borrowed from https://github.com/s2terminal/nlp-auto-eval-react/blob/main/lib/text.test.js
-
+import { jest, describe, test, expect, it } from '@jest/globals';
 import { tokenizer, nGram, nGramPrecision, bleu } from './text';
 
 it('tokenizer', () => {

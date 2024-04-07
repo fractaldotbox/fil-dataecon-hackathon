@@ -272,6 +272,9 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
       '@next/eslint-plugin-next':
         specifier: ^14.1.4
         version: 14.1.4

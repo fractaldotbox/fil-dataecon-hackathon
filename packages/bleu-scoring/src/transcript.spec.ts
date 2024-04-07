@@ -1,3 +1,4 @@
+import { jest, describe, test, expect, beforeAll } from '@jest/globals';
 import type { TranscriptScoreWeights } from './transcript';
 import {
   transcriptBleu,
