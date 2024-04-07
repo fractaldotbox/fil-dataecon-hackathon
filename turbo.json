@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "test": {
+      "dependsOn": ["^@repo/bleu-scoring#build"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

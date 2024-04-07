@@ -2,12 +2,13 @@
 pragma solidity ^0.8.11;
 
 import "@forge-std/Script.sol";
-import "./RagPull.sol";
+import "./DeRag.sol";
 
-contract RagPullScript is Script {
+contract DeRagScript is Script {
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        // address yourAddress = vm.addr(deployerPrivateKey);
+        uint256 deployerPrivateKey = vm.envUint("DEPLOYER_WALLET_PRIVATE_KEY");
+        address deployerAddress = vm.addr(deployerPrivateKey);
+        console.log('deployer address', deployerAddress);
         // vm.startBroadcast(deployerPrivateKey);
 
         // SimpleCoin coin = new SimpleCoin();
