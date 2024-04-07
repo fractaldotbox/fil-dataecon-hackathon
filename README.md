@@ -4,7 +4,7 @@
 
 This project is a submission to the hackathon.
 
-Slides can be found at <TODO>
+Slides can be found at https://docs.google.com/presentation/d/1AVLqkqH05mcDIStsDQljMHI_xg8kGiZ06iIAb6t2Bsg/edit?usp=sharing
 
 #### Demo
 
