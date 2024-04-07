@@ -8,9 +8,19 @@ Slides can be found at https://docs.google.com/presentation/d/1AVLqkqH05mcDIStsD
 
 #### Demo
 
+- https://www.loom.com/share/910016b14def41628351682c4efd785f
 - You can run the model at localhost:3001 with LangSmith to investigate queries
 
+
+## Trustless Verification
+
+### ZKML approach
+- We have added a python notebook to illustrate the process
+  - https://github.com/pedialab/fil-dataecon-hackathon/blob/main/apps/ezkl/house_price_prediction.ipynb
+
 ### Archiecture
+
+![alt text](image.png)
 
 ### Techstack in API
 
@@ -21,11 +31,11 @@ Slides can be found at https://docs.google.com/presentation/d/1AVLqkqH05mcDIStsD
   - `youtube-transcript` for transcript (testing when whisper not in use)
 
 ### Techstack of ML
-
+- langchain / openAI for LLM
 - `whisper` for transcript and translation
+- langsmith for LLM observability
 
 ### Techstack of validator
-
 - ezkl
 
 ### Techstack of Smart Contract

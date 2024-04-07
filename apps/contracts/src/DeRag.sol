@@ -31,8 +31,6 @@ contract DeRag is AccessControl {
       revert CallerNotValidator(msg.sender);
     }
 
-    // bytes[] memory cids = dealStatus.getAllCIDs();
-
     ILighthouseDealStatus.Deal[] memory deals = dealStatus.getAllDeals(cid);
 
     require(deals.length >= 1, "Deals must be at least 1");
