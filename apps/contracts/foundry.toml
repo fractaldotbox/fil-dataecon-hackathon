@@ -3,4 +3,18 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
+remappings = [
+    "@ds-test/=lib/ds-test/src/",
+    "@solmate/=lib/solmate/src/",
+    "@forge-std/=lib/forge-std/src/",
+    "@oz/=lib/oz/contracts/",
+
+    "@openzeppelin/contracts/=lib/forge-std/src/",
+    "@zondax/filecoin-solidity/=node_modules/@zondax/filecoin-solidity/"
+]
+
+rpc_endpoints = { calibration = '${CALIBRATION}' }
+chain_id = 3141
+fuzz_runs = 256
+optimizer = true
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
